@@ -1,0 +1,15 @@
+.btn--profile-cta {
+  padding: 1.1rem 1.3rem;
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 1.5rem 0;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  cursor: pointer;
+}
+button.btn.btn--profile-cta:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

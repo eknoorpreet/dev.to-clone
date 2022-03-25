@@ -1,0 +1,33 @@
+.container-create-page,
+.container-edit-page {
+  background: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  font-size: 1.6rem;
+  font-weight: 500;
+  align-items: center;
+  padding: 3.5rem 2rem 4.375rem 2rem;
+  margin: 0 auto;
+  margin-top: 2rem;
+  max-width: 64rem;
+  width: 100%;
+}
+.form__create h2,
+.form__edit h2 {
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 3rem;
+}
+
+.form__create label,
+.form__edit label {
+  font-weight: 700;
+}
+
+.form__group {
+  margin: 2rem 0;
+}
+
+span.input__error {
+  color: orangered;
+}

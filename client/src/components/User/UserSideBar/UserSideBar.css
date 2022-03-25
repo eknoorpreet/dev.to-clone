@@ -1,0 +1,24 @@
+.user__side {
+  display: none;
+  max-width: 30%;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .user__side {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.user__skills,
+.user__stats {
+  background: var(--color-white);
+  border: 2px solid #efefef;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+}
+
+.user-stats ul {
+  list-style: none;
+}

@@ -1,0 +1,15 @@
+.author__image {
+  width: 4rem;
+  height: 4rem;
+  min-width: 3rem;
+  border-radius: var(--border-radius-circle);
+  --webkit-shape-outside: circle(50% at 50% 50%);
+  shape-outside: circle(50% at 50% 50%);
+  --webkit-clip-path: circle(50% at 50% 50%);
+  clip-path: circle(50% at 50% 50%);
+  clip-path: circle(50% at 50% 50%);
+}
+.author__image img {
+  height: 100%;
+  width: 100%;
+}

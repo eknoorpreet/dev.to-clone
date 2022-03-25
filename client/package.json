@@ -1,0 +1,49 @@
+{
+  "name": "devto-clone-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "easymde": "^2.16.1",
+    "query-string": "^7.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-github-login": "^1.0.3",
+    "react-google-login": "^5.2.2",
+    "react-markdown": "^8.0.0",
+    "react-router-dom": "^5.2.0",
+    "react-router-hash-link": "^2.4.3",
+    "react-scripts": "^5.0.0",
+    "react-simplemde-editor": "^5.0.2",
+    "react-transition-group": "^4.4.2",
+    "socket.io-client": "^4.4.1",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

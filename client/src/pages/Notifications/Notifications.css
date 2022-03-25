@@ -1,0 +1,53 @@
+.container-notif-page {
+  width: 100%;
+  max-width: 100%;
+  min-height: 50vh;
+}
+
+.notif__heading {
+  margin: 0 0 1rem 1rem;
+}
+
+.notif {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  background: var(--color-white);
+}
+
+.notif__details {
+  width: 90%;
+  font-size: 1.3rem;
+}
+
+.notif__details p {
+  font-style: italic;
+}
+
+.notif__meta {
+  display: flex;
+  justify-content: space-between;
+}
+
+.meta__title {
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .container-notif-page {
+    max-width: 60rem;
+    font-size: 1.7rem;
+  }
+
+  .notif {
+    border-radius: var(--border-radius);
+    padding: 1.7rem 2rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+}

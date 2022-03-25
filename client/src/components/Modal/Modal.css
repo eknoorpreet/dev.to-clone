@@ -1,0 +1,114 @@
+.modal {
+  position: fixed;
+  font-size: 1.5rem;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+  z-index: 1;
+}
+.modal.enter-done {
+  opacity: 1;
+  pointer-events: visible;
+}
+.modal.exit {
+  opacity: 0;
+}
+.modal--show {
+  opacity: 1;
+  pointer-events: visible;
+}
+.modal__content {
+  width: 40%;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  background-color: var(--color-white);
+  transform: translateY(-20rem);
+  transition: all 0.3s ease-in-out;
+}
+.modal.enter-done .modal__content {
+  transform: translateY(0);
+}
+.modal.exit .modal__content {
+  transform: translateY(-20rem);
+}
+.modal__header {
+  padding: 0.7rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal__header i {
+  cursor: pointer;
+}
+.modal__footer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+}
+.modal .btn {
+  text-transform: none;
+  font-size: 1.6rem;
+}
+.modal .btn--delete {
+  background: var(--btn-bg-red);
+  color: var(--color-white);
+}
+.modal__title {
+  font-size: 2rem;
+  margin: 0;
+}
+.modal__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal__body {
+  padding: 1.5rem 0;
+  border-top: 2px solid #707070;
+}
+.modal__title {
+  margin: 0;
+}
+.nav__list--modal {
+  margin-top: 2.5rem;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+ul.nav__list--modal a {
+  min-width: auto;
+}
+ul.nav__list--modal li:not(:first-child) {
+  margin-left: 0;
+}
+.nav__list--modal li {
+  display: block;
+  width: 80%;
+  text-align: center;
+}
+.nav__logo--modal {
+  display: flex;
+  height: 6.5rem;
+  width: 6.5rem;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(-15deg);
+  margin: 1.5rem;
+}
+.nav__list--modal .nav__link--create {
+  display: inline-block;
+  background: var(--color-primary);
+  color: var(--color-white);
+  width: 100%;
+}
