@@ -317,6 +317,63 @@ const githubLogin = async (req, res, next) => {
   });
 };
 
+const fbLogin = async (req, res, next) => {
+  const { accessToken, userId } = req.body;
+
+  let urlGraphFb = `https://graph.facebook.com/v2.11/${userId}/?fields=id,name,email&access_token=${accessToken}`;
+
+  const response = await axios({
+    method: 'post',
+    url: urlGraphFb,
+    headers: {
+      accept: 'application/json',
+    },
+  });
+  const { name, email } = response.data;
+  let existingUser;
+  let user;
+  try {
+    existingUser = await User.findOne({ email }, '-password');
+    user = existingUser;
+  } catch (err) {
+    return next(new HttpError('Signing up failed, please try again!', 500));
+  }
+
+  if (!existingUser) {
+    let hashedPassword;
+    try {
+      hashedPassword = await bcrypt.hash(email + name + email, 12); //12 - number of salting rounds (can't be reverse-engineered)
+    } catch (err) {
+      return next(
+        new HttpError('Could not create user, please try again', 500)
+      );
+    }
+    user = new User({
+      name,
+      email,
+      password: hashedPassword,
+      avatar: DEFAULT_AVATAR,
+    });
+    try {
+      await user.save();
+    } catch (err) {
+      return next(new HttpError('Signup failed, please try again', 500));
+    }
+  }
+
+  const token = createJWTtoken(user.id, user.email);
+  res.status(201).json({
+    user: {
+      name: user.name,
+      userId: user.id,
+      email: user.email,
+      token,
+      bio: user.bio,
+      avatar: user.avatar,
+    },
+  });
+};
+
 const updateUser = async (req, res, next) => {
   const { userId } = req.params;
   const { body } = req;
@@ -393,6 +450,7 @@ exports.signup = signup;
 exports.login = login;
 exports.googleLogin = googleLogin;
 exports.githubLogin = githubLogin;
+exports.fbLogin = fbLogin;
 exports.updateUser = updateUser;
 exports.followUser = followUser;
 exports.unfollowUser = unfollowUser;

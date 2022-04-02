@@ -24,7 +24,7 @@ const GLogin = (props) => {
           clientId={clientId}
           render={(renderProps) => (
             <button
-              className='btn btn__g-auth'
+              className='btn btn__social'
               onClick={renderProps.onClick}
               disabled={renderProps.disabled}
             >

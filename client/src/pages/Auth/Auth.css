@@ -74,7 +74,7 @@
   color: var(--color-primary);
 }
 
-button.btn__g-auth {
+button.btn__social {
   width: 100%;
   text-transform: none;
   font-size: 1.6rem;
@@ -89,6 +89,11 @@ button.btn__g-auth {
 
 button.btn--gh {
   background: var(--color-black);
+  color: var(--color-white);
+}
+
+button.btn--fb {
+  background: #4065b5;
   color: var(--color-white);
 }
 

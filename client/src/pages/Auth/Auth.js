@@ -10,6 +10,7 @@ import { appendData } from '../../utils';
 import Welcome from '../../components/Auth/Welcome';
 import './Auth.css';
 import ErrorModal from '../../components/Modal/ErrorModal';
+import FBLogin from '../../components/Auth/FBLogin';
 
 const Auth = ({ newUser }) => {
   const { renderFormInputs, renderFormValues, isFormValid, setForm } =
@@ -66,6 +67,24 @@ const Auth = ({ newUser }) => {
     history.push('/');
   };
 
+  const onFBAuthHandle = async (fbData) => {
+    const responseData = await sendReq(
+      `${process.env.REACT_APP_BASE_URL}/users/auth/facebook`,
+      'POST',
+      JSON.stringify({
+        accessToken: fbData.accessToken,
+        userId: fbData.userID,
+      }),
+      {
+        'Content-Type': 'application/json', //inform backend the type of data being sent
+      }
+    );
+    let { user } = responseData;
+    user = { ...user, token: fbData.accessToken };
+    login(user); //log the user in
+    history.push('/');
+  };
+
   const authSubmitHandler = async (evt) => {
     evt.preventDefault();
     try {
@@ -100,6 +119,7 @@ const Auth = ({ newUser }) => {
         <div className='auth__social'>
           <GLogin onLogin={onGoogleAuthHandle} />
           <GHLogin onLogin={onGithubAuthHandle} />
+          <FBLogin onLogin={onFBAuthHandle} />
         </div>
 
         <form className='form__auth'>
