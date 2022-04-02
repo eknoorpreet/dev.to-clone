@@ -3,6 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 import { useHttpClient } from '../../hooks/useHttpClient';
 import GLogin from '../../components/Auth/GLogin';
+import GHLogin from '../../components/Auth/GHLogin';
 import useForm from '../../hooks/useForm';
 import { loginForm, signupForm } from '../../utils/formConfig';
 import { appendData } from '../../utils';
@@ -49,6 +50,22 @@ const Auth = ({ newUser }) => {
     history.push('/');
   };
 
+  const onGithubAuthHandle = async (githubData) => {
+    const { code } = githubData;
+    const responseData = await sendReq(
+      `${process.env.REACT_APP_BASE_URL}/users/auth/github`,
+      'POST',
+      JSON.stringify({ code }),
+      {
+        'Content-Type': 'application/json', //inform backend the type of data being sent
+      }
+    );
+    let { user } = responseData;
+    user = { ...user, token: githubData.code };
+    login(user); //log the user in
+    history.push('/');
+  };
+
   const authSubmitHandler = async (evt) => {
     evt.preventDefault();
     try {
@@ -80,7 +97,11 @@ const Auth = ({ newUser }) => {
       <ErrorModal error={error} onClose={clearError} />
       <div className='container container-auth'>
         <Welcome />
-        <GLogin onLogin={onGoogleAuthHandle} />
+        <div className='auth__social'>
+          <GLogin onLogin={onGoogleAuthHandle} />
+          <GHLogin onLogin={onGithubAuthHandle} />
+        </div>
+
         <form className='form__auth'>
           <div className='form__options'>
             <p>Or</p>

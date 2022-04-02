@@ -13,6 +13,8 @@ const CommentForm = ({
   const { currentUser } = useContext(AuthContext);
   const [text, setText] = useState(initialText);
   const isTextAreaDisabled = text.length === 0;
+  const DEFAULT_COMMENT_AVATAR =
+    'https://res.cloudinary.com/drkvr9wta/image/upload/v1647701003/undraw_profile_pic_ic5t_ncxyyo.png';
   // const commentText = useRef(null);
 
   const inputHandler = (evt) => {
@@ -33,7 +35,7 @@ const CommentForm = ({
           src={
             currentUser && currentUser.avatar
               ? currentUser.avatar
-              : process.env.REACT_APP_DEFAULT_COMMENT_AVATAR
+              : DEFAULT_COMMENT_AVATAR
           }
         />
       )}

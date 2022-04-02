@@ -1,16 +1,18 @@
 const { validationResult } = require('express-validator');
+const axios = require('axios');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { OAuth2Client } = require('google-auth-library');
 require('dotenv').config();
-
-const { GOOGLE_API_KEY, JWT_KEY, DEFAULT_COMMENT_AVATAR } = process.env;
+const { GOOGLE_API_KEY, JWT_KEY, GH_CLIENT_ID, GH_CLIENT_SECRET } = process.env;
 const client = new OAuth2Client(GOOGLE_API_KEY);
-
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 const Post = require('../models/post');
 const { fileUpload } = require('../middleware/file-upload');
+const { createJWTtoken } = require('../utils');
+const DEFAULT_AVATAR =
+  'https://res.cloudinary.com/drkvr9wta/image/upload/v1647701003/undraw_profile_pic_ic5t_ncxyyo.png';
 
 const {
   followNotification,
@@ -205,8 +207,6 @@ const googleLogin = async (req, res, next) => {
       );
     }
 
-    const createCustomId = customAlphabet(sub, 24);
-
     user = new User({
       name,
       email,
@@ -239,6 +239,72 @@ const googleLogin = async (req, res, next) => {
   //   },
   // });
 
+  res.status(201).json({
+    user: {
+      name: user.name,
+      userId: user.id,
+      email: user.email,
+      token,
+      bio: user.bio,
+      avatar: user.avatar,
+    },
+  });
+};
+
+const githubLogin = async (req, res, next) => {
+  const { code } = req.body;
+  if (!code) {
+    return next(
+      new HttpError('Signing up with GitHub failed, please try again!', 500)
+    );
+  }
+  const response = await axios({
+    method: 'post',
+    url: `https://github.com/login/oauth/access_token?client_id=${GH_CLIENT_ID}&client_secret=${GH_CLIENT_SECRET}&code=${code}`,
+    headers: {
+      accept: 'application/json',
+    },
+  });
+  const { access_token } = response.data;
+  const { data } = await axios({
+    method: 'get',
+    url: `https://api.github.com/user`,
+    headers: {
+      Authorization: `token ${access_token}`,
+    },
+  });
+  const { name, email, avatar_url } = data;
+  let existingUser;
+  let user;
+  try {
+    existingUser = await User.findOne({ email }, '-password');
+    user = existingUser;
+  } catch (err) {
+    return next(new HttpError('Signing up failed, please try again!', 500));
+  }
+
+  if (!existingUser) {
+    let hashedPassword;
+    try {
+      hashedPassword = await bcrypt.hash(email + name + email, 12); //12 - number of salting rounds (can't be reverse-engineered)
+    } catch (err) {
+      return next(
+        new HttpError('Could not create user, please try again', 500)
+      );
+    }
+    user = new User({
+      name,
+      email,
+      password: hashedPassword,
+      avatar: avatar_url || DEFAULT_AVATAR,
+    });
+    try {
+      await user.save();
+    } catch (err) {
+      return next(new HttpError('Signup failed, please try again', 500));
+    }
+  }
+  let token = createJWTtoken(user.id, user.email);
   res.status(201).json({
     user: {
       name: user.name,
@@ -326,6 +392,7 @@ exports.getUserById = getUserById;
 exports.signup = signup;
 exports.login = login;
 exports.googleLogin = googleLogin;
+exports.githubLogin = githubLogin;
 exports.updateUser = updateUser;
 exports.followUser = followUser;
 exports.unfollowUser = unfollowUser;

@@ -14,8 +14,12 @@
   margin-top: 2rem;
 }
 
-.auth__google {
+.auth__social {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
   width: 90%;
+  color: var(--color-white);
 }
 
 @media (min-width: 640px) {
@@ -81,4 +85,14 @@ button.btn__g-auth {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+button.btn--gh {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+button i {
+  margin-top: 0.3rem;
+  font-size: 2.3rem;
 }

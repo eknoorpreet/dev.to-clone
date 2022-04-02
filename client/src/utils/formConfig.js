@@ -1,3 +1,4 @@
+import React from 'react';
 import TagsInput from '../components/FormElements/TagsInput/TagsInput';
 import { BodyInput } from '../components/FormElements/BodyInput/BodyInput';
 import ImageUpload from '../components/FormElements/ImageUpload/ImageUpload';

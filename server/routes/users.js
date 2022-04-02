@@ -12,6 +12,7 @@ const {
   signup,
   login,
   googleLogin,
+  githubLogin,
   updateUser,
   followUser,
   unfollowUser,
@@ -35,6 +36,8 @@ router.post(
 );
 
 router.post('/auth/google', googleLogin);
+
+router.post('/auth/github', githubLogin);
 
 router.post('/login', login);
 
