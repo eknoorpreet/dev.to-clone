@@ -4,7 +4,7 @@ const parser = new DatauriParser();
 
 const path = require('path');
 require('dotenv').config();
-const { JWT_KEY } = process.env;
+const { JWT_KEY, NODE_ENV, CLIENT_URL } = process.env;
 const { cloudinary } = require('../config/cloudinary');
 
 const uploadToCloudinary = async (file) => {
@@ -37,5 +37,16 @@ const createJWTtoken = (id, email) => {
   return jwtToken;
 };
 
+const getClientURL = () => {
+  let clientURL;
+  if (NODE_ENV === 'production') {
+    clientURL = 'https://devfrom.netlify.app';
+  } else {
+    clientURL = CLIENT_URL;
+  }
+  return clientURL;
+};
+
 exports.uploadToCloudinary = uploadToCloudinary;
 exports.createJWTtoken = createJWTtoken;
+exports.getClientURL = getClientURL;

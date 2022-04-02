@@ -6,7 +6,7 @@
   font-weight: 500;
   align-items: center;
   padding: 3.5rem 2rem 4.375rem 2rem;
-  max-width: 60rem;
+  max-width: 64rem;
   width: 100%;
 }
 
@@ -94,6 +94,11 @@ button.btn--gh {
 
 button.btn--fb {
   background: #4065b5;
+  color: var(--color-white);
+}
+
+button.btn--tw {
+  background: #3796f2;
   color: var(--color-white);
 }
 

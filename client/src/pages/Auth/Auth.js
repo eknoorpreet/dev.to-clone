@@ -11,6 +11,7 @@ import Welcome from '../../components/Auth/Welcome';
 import './Auth.css';
 import ErrorModal from '../../components/Modal/ErrorModal';
 import FBLogin from '../../components/Auth/FBLogin';
+import TwitterLogin from '../../components/Auth/TwitterLogin';
 
 const Auth = ({ newUser }) => {
   const { renderFormInputs, renderFormValues, isFormValid, setForm } =
@@ -33,7 +34,7 @@ const Auth = ({ newUser }) => {
   const { sendReq, error, clearError } = useHttpClient();
 
   //handle google auth
-  const onGoogleAuthHandle = async (googleData) => {
+  const handleGoogleAuth = async (googleData) => {
     //getting tokenID from GLogin
     const responseData = await sendReq(
       `${process.env.REACT_APP_BASE_URL}/users/auth/google`,
@@ -51,7 +52,7 @@ const Auth = ({ newUser }) => {
     history.push('/');
   };
 
-  const onGithubAuthHandle = async (githubData) => {
+  const handleGithubAuth = async (githubData) => {
     const { code } = githubData;
     const responseData = await sendReq(
       `${process.env.REACT_APP_BASE_URL}/users/auth/github`,
@@ -67,7 +68,7 @@ const Auth = ({ newUser }) => {
     history.push('/');
   };
 
-  const onFBAuthHandle = async (fbData) => {
+  const handleFBAuth = async (fbData) => {
     const responseData = await sendReq(
       `${process.env.REACT_APP_BASE_URL}/users/auth/facebook`,
       'POST',
@@ -85,7 +86,7 @@ const Auth = ({ newUser }) => {
     history.push('/');
   };
 
-  const authSubmitHandler = async (evt) => {
+  const handleAuthSubmit = async (evt) => {
     evt.preventDefault();
     try {
       let responseData;
@@ -117,9 +118,10 @@ const Auth = ({ newUser }) => {
       <div className='container container-auth'>
         <Welcome />
         <div className='auth__social'>
-          <GLogin onLogin={onGoogleAuthHandle} />
-          <GHLogin onLogin={onGithubAuthHandle} />
-          <FBLogin onLogin={onFBAuthHandle} />
+          <GLogin onLogin={handleGoogleAuth} />
+          <GHLogin onLogin={handleGithubAuth} />
+          <FBLogin onLogin={handleFBAuth} />
+          <TwitterLogin />
         </div>
 
         <form className='form__auth'>
@@ -133,7 +135,7 @@ const Auth = ({ newUser }) => {
             {formInputs}
 
             <button
-              onClick={authSubmitHandler}
+              onClick={handleAuthSubmit}
               className='btn btn__auth btn__auth--mode'
               disabled={!isFormValid()}
             >

@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/auth';
 import { SearchContext } from '../../context/search';
 import { SocketContext } from '../../context/socket';
 import useAuth from '../../hooks/useAuth';
-import '../../App.css';
+import '../../styles/main.css';
 
 const AppProviders = ({ children }) => {
   const { token, login, logout, userId, user, setUser } = useAuth();

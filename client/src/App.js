@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './styles/main.css';
 import AppProviders from './components/AppProviders/AppProviders';
 import MainRouter from './MainRouter';
 

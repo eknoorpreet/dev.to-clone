@@ -14,7 +14,7 @@ export const useHttpClient = () => {
   //wrapped sendReq in a 'useCallback' hook to prevent it from being re-created every render
   //and avoid infinite loops
   const sendReq = useCallback(
-    async (url, method = 'GET', body = null, headers = {}) => {
+    async (url, method = 'GET', body = null, headers = {}, credentials) => {
       if (method === 'GET') {
         setIsLoading(true);
       }
@@ -27,6 +27,7 @@ export const useHttpClient = () => {
           body,
           headers,
           signal: httpAbortCtrl.signal, //assign abortCtrl to a req
+          credentials,
         });
         const responseData = await response.json(); //parse the response body
 

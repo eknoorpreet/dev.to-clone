@@ -6,7 +6,6 @@ import useHttpClient from '../../hooks/useHttpClient';
 const GLogin = (props) => {
   const [showLoginButton, setShowLoginButton] = useState(true);
   const { setError } = useHttpClient();
-  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
   const onLoginSuccess = (res) => {
     props.onLogin(res);
@@ -21,7 +20,7 @@ const GLogin = (props) => {
     <div className='auth__google'>
       {showLoginButton && (
         <GoogleLogin
-          clientId={clientId}
+          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           render={(renderProps) => (
             <button
               className='btn btn__social'
@@ -31,7 +30,6 @@ const GLogin = (props) => {
               <i>
                 <FcGoogle />
               </i>
-
               <span>Continue with Google</span>
             </button>
           )}
