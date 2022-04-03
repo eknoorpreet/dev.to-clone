@@ -9,6 +9,7 @@ const { fileUpload } = require('../middleware/file-upload');
 const checkAuth = require('../middleware/check-auth');
 require('dotenv').config;
 const { getClientURL } = require('../utils');
+
 const {
   getUserById,
   signup,

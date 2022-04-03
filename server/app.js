@@ -22,11 +22,15 @@ const { DB_USER, DB_PASSWORD, DB_NAME, COOKIE_KEY, PORT } = process.env;
 
 const httpServer = createServer(app);
 
+app.set('trust proxy', 1);
+
 app.use(
   cookieSession({
     name: 'session',
     keys: [COOKIE_KEY],
     maxAge: 24 * 60 * 60 * 1000, // session will expire after 24 hours
+    secure: true,
+    sameSite: 'none',
   })
 );
 
