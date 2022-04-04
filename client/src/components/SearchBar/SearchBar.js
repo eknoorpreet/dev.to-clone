@@ -15,6 +15,7 @@ const SearchBar = (props) => {
     if (evt.keyCode === 13) {
       evt.preventDefault();
       search(value);
+      // setValue('');
     }
   };
 

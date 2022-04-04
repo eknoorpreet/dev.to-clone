@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ErrorModal from '../../components/Modal/ErrorModal';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import useHttpClient from '../../hooks/useHttpClient';
 import PostList from '../PostList/PostList';
 const Posts = ({ cover }) => {
@@ -20,9 +19,8 @@ const Posts = ({ cover }) => {
 
   return (
     <>
-      {isLoading && <LoadingSpinner asOverlay={true} />}
       <ErrorModal error={error} onClose={clearError} />
-      {!isLoading && loadedPosts && (
+      {loadedPosts && (
         <PostList isLoading={isLoading} items={loadedPosts} cover={cover} />
       )}
     </>

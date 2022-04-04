@@ -3,13 +3,15 @@ import { Link, useParams } from 'react-router-dom';
 import { useHttpClient } from '../../hooks/useHttpClient';
 import PostList from '../../components/PostList/PostList';
 import ErrorModal from '../../components/Modal/ErrorModal';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { FollowUser } from '../../components/FollowUser/FollowUser';
 import AuthModal from '../../components/Modal/AuthModal';
 import Avatar from '../../components/Avatar/Avatar';
 import { UserInfo } from '../../components/User/UserInfo/UserInfo';
 import { UserSideBar } from '../../components/User/UserSideBar/UserSideBar';
 import { AuthContext } from '../../context/auth';
+import SkeletonElement from '../../components/Skeleton/SkeletonElement';
+import { renderRepeatedSkeletons } from '../../utils';
+import Shimmer from '../../components/Skeleton/Shimmer';
 
 const UserProfile = () => {
   const [user, setUser] = useState({});
@@ -37,41 +39,50 @@ const UserProfile = () => {
 
   return (
     <>
-      {isLoading && <LoadingSpinner asOverlay={true} />}
       <ErrorModal error={error} onClose={clearError} />
       <AuthModal onClose={() => setShowModal(false)} show={showModal} />
-      {!isLoading && (
-        <div className='container-layout container-user'>
-          <div className='user__main'>
-            <Avatar src={user.avatar} />
-            <div className='main__cta'>
-              <h2>{user.name}</h2>
-              {userId === currentUserId ? (
-                <Link
-                  className='btn btn--profile-cta btn--profile-edit'
-                  to={`/users/${userId}/edit`}
-                >
-                  Edit Profile
-                </Link>
-              ) : (
-                <FollowUser
-                  followId={user.id}
-                  followers={user.followers}
-                  userToFollow={user}
-                  setShowModal={setShowModal}
-                />
-              )}
-            </div>
-            <UserInfo user={user} />
+      <div className='container-layout container-user'>
+        <div className='user__main'>
+          <Avatar src={user.avatar} isLoading={isLoading} />
+          <div className='main__cta'>
+            <h2>{user.name}</h2>
+            {userId === currentUserId ? (
+              <Link
+                className='btn btn--profile-cta btn--profile-edit'
+                to={`/users/${userId}/edit`}
+              >
+                Edit Profile
+              </Link>
+            ) : (
+              <FollowUser
+                followId={user.id}
+                followers={user.followers}
+                userToFollow={user}
+                setShowModal={setShowModal}
+              />
+            )}
           </div>
-          <div className='user__content'>
-            <UserSideBar user={user} />
-            <div className='wrapper__user--posts'>
-              {posts && <PostList cover={false} items={posts} author={user} />}
-            </div>
+          {isLoading ? (
+            <>
+              {renderRepeatedSkeletons(<SkeletonElement type='text' />, 2)}
+              <Shimmer />
+            </>
+          ) : (
+            <UserInfo user={user} />
+          )}
+        </div>
+        <div className='user__content'>
+          <UserSideBar user={user} />
+          <div className='wrapper__user--posts'>
+            <PostList
+              cover={false}
+              items={posts}
+              author={user}
+              isLoading={Boolean(!user.avatar)}
+            />
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

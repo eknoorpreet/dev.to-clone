@@ -4,7 +4,8 @@ import { useHttpClient } from '../../hooks/useHttpClient';
 import { AuthContext } from '../../context/auth';
 import useForm from '../../hooks/useForm';
 import ErrorModal from '../../components/Modal/ErrorModal';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import SkeletonForm from '../../components/Skeleton/SkeletonForm';
+
 import {
   editProfileForm,
   prefillEditProfileForm,
@@ -61,10 +62,11 @@ const EditUserProfile = () => {
 
   return (
     <>
-      {isLoading && <LoadingSpinner asOverlay={true} />}
       <ErrorModal error={error} onClose={clearError} />
-      {!isLoading && (
-        <div className='container-edit-page'>
+      <div className='container-edit-page'>
+        {isLoading ? (
+          <SkeletonForm />
+        ) : (
           <form className='form form__edit' onSubmit={infoSubmitHandle}>
             <h2>Edit Profile</h2>
             {!isLoading && user.avatar && formInputs}
@@ -72,8 +74,8 @@ const EditUserProfile = () => {
               Update Profile
             </button>
           </form>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };

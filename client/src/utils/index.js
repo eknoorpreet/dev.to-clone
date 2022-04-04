@@ -56,3 +56,23 @@ export const getRandomColor = () => {
   }
   return color;
 };
+
+export const renderRepeatedSkeletons = (element, count) => {
+  let skeletons = [];
+  for (let i = 0; i < count; i++) {
+    skeletons.push(element);
+  }
+  return skeletons;
+};
+
+export const renderAlternateSkeletons = (elementOne, elementTwo, count) => {
+  let skeletons = [];
+  for (let i = 0; i < count; i++) {
+    if (i % 2 === 0) {
+      skeletons.push(elementOne);
+    } else {
+      skeletons.push(elementTwo);
+    }
+  }
+  return skeletons;
+};

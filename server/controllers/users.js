@@ -379,7 +379,7 @@ const fbLogin = async (req, res, next) => {
 // when login is successful, retrieve user info
 const twitterLogin = (req, res) => {
   if (req.user) {
-    const { name, userId, email, bio, avatar } = req.user;
+    const { name, id: userId, email, bio, avatar } = req.user;
     const token = createJWTtoken(req.user.id, req.user.email);
     res.status(201).json({
       user: {

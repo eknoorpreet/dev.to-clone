@@ -8,9 +8,13 @@
   margin: 0 0 1rem 1rem;
 }
 
+.notifications > p {
+  margin-left: 1rem;
+}
+
 .notif {
   display: flex;
-  gap: 1.5rem;
+  gap: 0.7rem;
   padding: 1.25rem 1.5rem;
   margin-bottom: 1rem;
   background: var(--color-white);

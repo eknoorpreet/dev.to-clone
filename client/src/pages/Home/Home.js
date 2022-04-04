@@ -7,7 +7,7 @@ import { AuthContext } from '../../context/auth';
 
 const Home = () => {
   const [tags, setTags] = useState([]);
-  const { sendReq } = useHttpClient();
+  const { sendReq, isLoading } = useHttpClient();
   const { login } = useContext(AuthContext);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const Home = () => {
         <LeftSideBar />
       </div>
       <Posts cover={true} />
-      <RightSideBar tags={tags} />
+      <RightSideBar tags={tags} isLoading={isLoading} />
     </div>
   );
 };

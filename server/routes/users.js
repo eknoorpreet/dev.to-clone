@@ -8,7 +8,7 @@ const postsControllers = require('../controllers/posts');
 const { fileUpload } = require('../middleware/file-upload');
 const checkAuth = require('../middleware/check-auth');
 require('dotenv').config;
-const { getClientURL } = require('../utils');
+const { CLIENT_URL } = process.env;
 
 const {
   getUserById,
@@ -61,7 +61,7 @@ router.get('/auth/twitter', passport.authenticate('twitter'));
 router.get(
   '/auth/twitter/callback',
   passport.authenticate('twitter', {
-    successRedirect: getClientURL(),
+    successRedirect: CLIENT_URL,
     failureRedirect: '/auth/twitter/failed',
   })
 );

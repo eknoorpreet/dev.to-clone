@@ -16,9 +16,16 @@ const commentsRoutes = require('./routes/comments');
 const tagsRoutes = require('./routes/tags');
 const HttpError = require('./models/http-error');
 const { socketHandlers } = require('./utils/socket');
-const { getClientURL } = require('./utils');
 
-const { DB_USER, DB_PASSWORD, DB_NAME, COOKIE_KEY, PORT } = process.env;
+const {
+  DB_USER,
+  DB_PASSWORD,
+  DB_NAME,
+  COOKIE_KEY,
+  PORT,
+  NODE_ENV,
+  CLIENT_URL,
+} = process.env;
 
 const httpServer = createServer(app);
 
@@ -29,8 +36,8 @@ app.use(
     name: 'session',
     keys: [COOKIE_KEY],
     maxAge: 24 * 60 * 60 * 1000, // session will expire after 24 hours
-    secure: true,
-    sameSite: 'none',
+    secure: NODE_ENV === 'development' ? false : true,
+    sameSite: NODE_ENV === 'development' ? false : 'none',
   })
 );
 
@@ -50,7 +57,7 @@ socketHandlers(io);
 
 app.use(
   cors({
-    origin: getClientURL(), // allow to server to accept request from different origin
+    origin: CLIENT_URL, // allow to server to accept request from different origin
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // allow session cookie from browser to pass through
   })

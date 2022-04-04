@@ -1,30 +1,22 @@
-import React, { useContext, Suspense } from 'react';
+import React, { useContext } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
+import NewPost from './pages/NewPost/NewPost';
+import EditPost from './pages/EditPost/EditPost';
+import Auth from './pages/Auth/Auth';
 import Home from './pages/Home/Home';
+import UserProfile from './pages/UserProfile/UserProfile';
+import EditUserProfile from './pages/EditUserProfile/EditUserProfile';
+import Notifications from './pages/Notifications/Notifications';
 import MainNavigation from './components/MainNavigation/MainNavigation.js';
 import Tags from './components/Tags/Tags';
+import Tag from './pages/Tag/Tag';
+import Post from './pages/Post/Post';
 import { SearchContext } from './context/search';
+import SearchResults from './pages/SearchResults/SearchResults';
+import ReadingList from './pages/ReadingList/ReadingList';
 import Footer from './components/Footer/Footer';
 import { AuthContext } from './context/auth';
-import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
 import { BrowserRouter as Router } from 'react-router-dom';
-
-const Auth = React.lazy(() => import('./pages/Auth/Auth'));
-const UserProfile = React.lazy(() => import('./pages/UserProfile/UserProfile'));
-const EditUserProfile = React.lazy(() =>
-  import('./pages/EditUserProfile/EditUserProfile')
-);
-const Notifications = React.lazy(() =>
-  import('./pages/Notifications/Notifications')
-);
-const Tag = React.lazy(() => import('./pages/Tag/Tag'));
-const Post = React.lazy(() => import('./pages/Post/Post'));
-const SearchResults = React.lazy(() =>
-  import('./pages/SearchResults/SearchResults')
-);
-const NewPost = React.lazy(() => import('./pages/NewPost/NewPost'));
-const EditPost = React.lazy(() => import('./pages/EditPost/EditPost'));
-const ReadingList = React.lazy(() => import('./pages/ReadingList/ReadingList'));
 
 const MainRouter = ({ token }) => {
   let routes;
@@ -119,19 +111,8 @@ const MainRouter = ({ token }) => {
       </>
     );
   }
-  return (
-    <Router>
-      <Suspense
-        fallback={
-          <div className='center'>
-            <LoadingSpinner asOverlay={true} />
-          </div>
-        }
-      >
-        {routes}
-      </Suspense>
-    </Router>
-  );
+
+  return <Router>{routes}</Router>;
 };
 
 export default MainRouter;

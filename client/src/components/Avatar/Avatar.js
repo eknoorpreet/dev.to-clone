@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SkeletonElement from '../Skeleton/SkeletonElement';
 import './Avatar.css';
 
 const Avatar = (props) => {
@@ -14,7 +15,11 @@ const Avatar = (props) => {
   }
   return (
     <div className={`author__image ${props.className}`}>
-      <img src={props.src} alt={props.alt ? props.alt : 'avatar'} />
+      {props.isLoading ? (
+        <SkeletonElement type='avatar' />
+      ) : (
+        <img src={props.src} alt={props.alt ? props.alt : 'avatar'} />
+      )}
     </div>
   );
 };

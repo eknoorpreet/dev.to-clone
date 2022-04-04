@@ -2,13 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHttpClient } from '../../hooks/useHttpClient';
 import { AuthContext } from '../../context/auth';
 import Notification from '../../components/Notification/Notification';
-import {
-  useHistory,
-  useParams,
-} from 'react-router-dom/cjs/react-router-dom.min';
 import './Notifications.css';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import ErrorModal from '../../components/Modal/ErrorModal';
+import SkeletonPostList from '../../components/Skeleton/SkeletonPostList';
 
 const Notifications = ({ user, userFollowStats }) => {
   const { currentUser } = useContext(AuthContext);
@@ -32,21 +28,19 @@ const Notifications = ({ user, userFollowStats }) => {
     fetchNotifications();
   }, [sendReq, currentUser.userId, currentUser]);
 
-  const history = useHistory();
-  const { userId } = useParams();
-
-  useEffect(() => {
-    if (currentUser && currentUser.userId !== userId) {
-      history.push('/');
-    }
-  }, [history, currentUser, userId]);
+  // useEffect(() => {
+  //   if (currentUser && currentUser.userId !== userId) {
+  //     history.push('/');
+  //   }
+  // }, [history, currentUser, userId]);
 
   return (
     <>
-      {isLoading && <LoadingSpinner asOverlay={true} />}
       <ErrorModal error={error} onClose={clearError} />
-      {!isLoading && (
-        <div className='container container-notif-page'>
+      <div className='container container-notif-page'>
+        {isLoading ? (
+          <SkeletonPostList type='mini' />
+        ) : (
           <>
             <h3 className='notif__heading'>Notifications</h3>
             <div className='notifications'>
@@ -63,8 +57,8 @@ const Notifications = ({ user, userFollowStats }) => {
               )}
             </div>
           </>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };

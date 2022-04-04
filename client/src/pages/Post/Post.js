@@ -5,8 +5,8 @@ import PostReactions from '../../components/Post/PostReactions/PostReactions';
 import PostContent from '../../components/Post/PostContent/PostContent';
 import PostAuthor from '../../components/Post/PostAuthor/PostAuthor';
 import ErrorModal from '../../components/Modal/ErrorModal';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import AuthModal from '../../components/Modal/AuthModal';
+import { SkeletonPage } from '../../components/Skeleton/SkeletonPage';
 
 const Post = (props) => {
   const [post, setPost] = useState({});
@@ -30,7 +30,7 @@ const Post = (props) => {
 
   return (
     <>
-      {isLoading && <LoadingSpinner asOverlay={true} />}
+      {isLoading && <SkeletonPage />}
       <ErrorModal error={error} onClose={clearError} />
       {!isLoading && post.author && (
         <div className='container-layout-post'>
@@ -38,7 +38,11 @@ const Post = (props) => {
           <AuthModal onClose={() => setShowModal(false)} show={showModal} />
           <div className='container-post'>
             <PostContent post={post} />
-            <PostAuthor setShowModal={setShowModal} author={author} />
+            <PostAuthor
+              setShowModal={setShowModal}
+              author={author}
+              isLoading={isLoading}
+            />
           </div>
         </div>
       )}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHttpClient } from '../../hooks/useHttpClient';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import ErrorModal from '../../components/Modal/ErrorModal';
 import TagList from './TagList';
 import './Tags.css';
@@ -22,9 +21,8 @@ const Tags = () => {
   }, [sendReq]);
   return (
     <>
-      {isLoading && <LoadingSpinner asOverlay={true} />}
       <ErrorModal error={error} onClose={clearError} />
-      {!isLoading && <TagList tags={loadedTags} />}
+      <TagList isLoading={isLoading} tags={loadedTags} />
     </>
   );
 };

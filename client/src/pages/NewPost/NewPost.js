@@ -4,9 +4,9 @@ import useForm from '../../hooks/useForm';
 import { AuthContext } from '../../context/auth';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { newPostForm } from '../../utils/formConfig';
-import { appendData } from '../../utils';
+import { appendData, renderRepeatedSkeletons } from '../../utils';
 import ErrorModal from '../../components/Modal/ErrorModal';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import SkeletonElement from '../../components/Skeleton/SkeletonElement';
 
 const NewPost = () => {
   const auth = useContext(AuthContext);
@@ -37,9 +37,10 @@ const NewPost = () => {
 
   return (
     <>
-      {isLoading && <LoadingSpinner asOverlay={true} />}
       <ErrorModal error={error} onClose={clearError} />
-      {!isLoading && (
+      {isLoading ? (
+        renderRepeatedSkeletons(<SkeletonElement type='text' />, 20)
+      ) : (
         <div className='container-create-page'>
           <form className='form form__create'>
             <h2>Add a New Post</h2>

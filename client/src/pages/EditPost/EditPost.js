@@ -5,8 +5,8 @@ import { AuthContext } from '../../context/auth';
 import useForm from '../../hooks/useForm';
 import { editPostForm, prefillEditPostForm } from '../../utils/formConfig';
 import { appendData } from '../../utils';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import ErrorModal from '../../components/Modal/ErrorModal';
+import SkeletonForm from '../../components/Skeleton/SkeletonForm';
 
 const EditPost = () => {
   const { sendReq, isLoading, error, clearError } = useHttpClient();
@@ -55,10 +55,12 @@ const EditPost = () => {
 
   return (
     <>
-      {isLoading && <LoadingSpinner asOverlay={true} />}
       <ErrorModal error={error} onClose={clearError} />
-      {!isLoading && (
-        <div className='container-edit-page'>
+
+      <div className='container-edit-page'>
+        {isLoading ? (
+          <SkeletonForm />
+        ) : (
           <form className='form form__edit'>
             <h2>Edit Post</h2>
             {!isLoading && loadedPost.image && loadedPost.body && formInputs}
@@ -71,8 +73,8 @@ const EditPost = () => {
               Update Post
             </button>
           </form>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };
