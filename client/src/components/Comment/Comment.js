@@ -21,6 +21,7 @@ const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
         <Avatar
           className='author__image--comment'
           src={`${comment.author.avatar}`}
+          link={`/users/${comment.author.id}`}
         />
         <div className='comment'>
           <div className='comment__content'>

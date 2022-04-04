@@ -9,6 +9,7 @@ import { PostTags } from '../../PostTags/PostTags';
 import { PostImage } from '../../PostImage/PostImage';
 import { formatDate } from '../../../utils';
 import './PostContent.css';
+import SyntaxHighlight from '../../SyntaxHighlight';
 
 const PostContent = ({ post, handleDelete }) => {
   const { image, imgAlt, author, titleURL, date, title, tags, body, id } = post;
@@ -32,7 +33,7 @@ const PostContent = ({ post, handleDelete }) => {
         <h1 className='post__heading'>{title}</h1>
         <PostTags tags={tags} />
         <div className='post__text'>
-          <ReactMarkdown>{body}</ReactMarkdown>
+          <ReactMarkdown components={SyntaxHighlight}>{body}</ReactMarkdown>
         </div>
 
         <div className='post__auth'>
