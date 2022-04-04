@@ -8,7 +8,6 @@ import '../../styles/main.css';
 
 const AppProviders = ({ children }) => {
   const { token, login, logout, userId, user, setUser } = useAuth();
-  const [searched, setSearched] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
@@ -38,8 +37,6 @@ const AppProviders = ({ children }) => {
     >
       <SearchContext.Provider
         value={{
-          searched,
-          setSearched,
           searchValue,
           setSearchValue,
           searchResults,

@@ -7,12 +7,9 @@ import SideDrawer from '../SideDrawer/SideDrawer';
 import { AuthContext } from '../../../context/auth';
 import { useHttpClient } from '../../../hooks/useHttpClient';
 import { NavLink } from 'react-router-dom';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { SearchContext } from '../../../context/search';
 
 const Nav = ({ children, onSearchIconClick }) => {
   const { currentUser } = useContext(AuthContext);
-  const { setSearched } = useContext(SearchContext);
   const { current } = useContext(SocketContext).socket;
 
   let userId;
@@ -60,7 +57,6 @@ const Nav = ({ children, onSearchIconClick }) => {
     });
   }, [current]);
 
-  const history = useHistory();
 
   return (
     <div className='container container-nav'>
@@ -70,14 +66,7 @@ const Nav = ({ children, onSearchIconClick }) => {
 
       <div className='header__hamburger-menu' onClick={openDrawerHandler}></div>
       <div className='header__logo-search'>
-        <NavLink
-          to='/'
-          className='header__logo'
-          onClick={() => {
-            setSearched(false);
-            history.push('/');
-          }}
-        >
+        <NavLink to='/' className='header__logo'>
           <FaDev size='4.125rem' />
         </NavLink>
         {children}

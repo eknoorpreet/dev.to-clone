@@ -5,8 +5,7 @@ import { SearchContext } from '../context/search';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const useSearch = () => {
-  const { setSearched, setSearchValue, setSearchResults } =
-    useContext(SearchContext);
+  const { setSearchValue, setSearchResults } = useContext(SearchContext);
 
   const { sendReq } = useHttpClient();
   const history = useHistory();
@@ -16,14 +15,12 @@ const useSearch = () => {
       setSearchValue(value);
       try {
         const data = await list({ search: value || undefined });
-        setSearched(true);
         setSearchResults(data);
         history.push(`/search/?query=${value}`);
       } catch (err) {
         console.log(err);
       }
     } else {
-      setSearched(false);
       setSearchResults([]);
     }
   };
