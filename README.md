@@ -30,7 +30,7 @@ An DEV.to clone created with MongoDB, Express, React, and Socket.io
 ## Features
 
 - Login / Signup
-- Google Oauth
+- Google / Facebook / Twitter / GitHub OAuth
 - Create / Remove / Update / Delete Post
 - Like / Unicorn / Bookmark Post
 - Reading List
@@ -45,6 +45,37 @@ An DEV.to clone created with MongoDB, Express, React, and Socket.io
 - Follow User
 - Search Posts
 - Real-time Notifications
+- Skeleton Loading
+
+## Screenshots
+
+### Login / Signup
+
+![](screenshots/devto-login-signup.gif)
+
+### Like / Unicorn / Bookmark
+
+![](screenshots/devto-like-unicorn-bookmark.gif)
+
+### Create Post / Comment
+
+![](screenshots/devto-create-post-comment.gif)
+
+### Real-time Notifications
+
+![](screenshots/devto-real-time.gif)
+
+### Follow Tags
+
+![](screenshots/devto-tags.gif)
+
+### Edit Profile
+
+![](screenshots/devto-edit-profile.gif)
+
+### Search
+
+![](screenshots/devto-search.gif)
 
 ## How to setup locally
 
@@ -77,23 +108,36 @@ In `client/.env`:
 REACT_APP_BASE_URL=http://localhost:5000/api
 REACT_APP_SOCKET_IO_URL=http://localhost:5000
 REACT_APP_GOOGLE_CLIENT_ID=<GOOGLE_CLIENT_ID>
+REACT_APP_GITHUB_CLIENT_ID=<GITHUB_CLIENT_ID>
+REACT_APP_FB_APP_ID=<FACEBOOK_CLIENT_ID>
 ```
 
 In `server/.env`:
 
 ```js
-DB_USER= //user name for db
-DB_PASSWORD= //password for db
-DB_NAME= // name for db
-JWT_KEY= //random string
+DB_USER = //user name for db
+DB_PASSWORD = //password for db
+DB_NAME = // name for db
+JWT_KEY = //random string
+COOKIE_KEY = //random string;
+NODE_ENV = 'development';
+CLIENT_URL = //the port of React app, ex: 'http://localhost:3000';
 
 //cloundiary will provide you with the following credentials
-CLOUDINARY_CLOUD_NAME= //cloud name
-CLOUDINARY_API_KEY= //API key
+CLOUDINARY_CLOUD_NAME = //cloud name
+CLOUDINARY_API_KEY = //API key
 CLOUDINARY_API_SECRET; //API secret
 
 //Google will provide you with the following credentials
 GOOGLE_API_KEY = //API key
+
+//Github will provide you with the following credentials
+GH_CLIENT_ID = //Github's Client ID
+GH_CLIENT_SECRET = //Github's Client Secret
+
+// Twitter will provide you with the following credentials
+TWITTER_CONSUMER_KEY = //Twitter's Consumer key
+TWITTER_CONSUMER_SECRET = //Twitter's Consumer Secret
 ```
 
 Finally, run <code>npm start</code> in both `client` and `server` subdirectories
