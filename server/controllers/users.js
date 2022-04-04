@@ -188,7 +188,9 @@ const googleLogin = async (req, res, next) => {
       //Has the user signed in with google before
       emailVerified = true;
 
-      existingUser = await User.findOne({ email }, '-password');
+      existingUser = await User.findOne({ email }, '-password').populate(
+        'followedTags'
+      );
       user = existingUser;
     } catch (err) {
       return next(new HttpError('Signing up failed, please try again!', 500));
@@ -215,7 +217,7 @@ const googleLogin = async (req, res, next) => {
       password: hashedPassword,
       avatar: picture || DEFAULT_AVATAR,
     });
-
+    user = user.populate('followedTags');
     try {
       await user.save();
     } catch (err) {
@@ -235,12 +237,6 @@ const googleLogin = async (req, res, next) => {
     return next(new HttpError('Signup failed, please try again', 500));
   }
 
-  // res.status(201).json({
-  //   user: {
-  //     ...user.toObject({ getters: true }),
-  //   },
-  // });
-
   res.status(201).json({
     user: {
       name: user.name,
@@ -249,6 +245,7 @@ const googleLogin = async (req, res, next) => {
       token,
       bio: user.bio,
       avatar: user.avatar,
+      tags: user.followedTags,
     },
   });
 };
@@ -279,7 +276,9 @@ const githubLogin = async (req, res, next) => {
   let existingUser;
   let user;
   try {
-    existingUser = await User.findOne({ email }, '-password');
+    existingUser = await User.findOne({ email }, '-password').populate(
+      'followedTags'
+    );
     user = existingUser;
   } catch (err) {
     return next(new HttpError('Signing up failed, please try again!', 500));
@@ -300,6 +299,8 @@ const githubLogin = async (req, res, next) => {
       password: hashedPassword,
       avatar: avatar_url || DEFAULT_AVATAR,
     });
+    user = user.populate('followedTags');
+
     try {
       await user.save();
     } catch (err) {
@@ -315,6 +316,7 @@ const githubLogin = async (req, res, next) => {
       token,
       bio: user.bio,
       avatar: user.avatar,
+      tags: user.followedTags,
     },
   });
 };
@@ -335,7 +337,9 @@ const fbLogin = async (req, res, next) => {
   let existingUser;
   let user;
   try {
-    existingUser = await User.findOne({ email }, '-password');
+    existingUser = await User.findOne({ email }, '-password').populate(
+      'followedTags'
+    );
     user = existingUser;
   } catch (err) {
     return next(new HttpError('Signing up failed, please try again!', 500));
@@ -356,6 +360,8 @@ const fbLogin = async (req, res, next) => {
       password: hashedPassword,
       avatar: DEFAULT_AVATAR,
     });
+    user = user.populate('followedTags');
+
     try {
       await user.save();
     } catch (err) {
@@ -372,6 +378,7 @@ const fbLogin = async (req, res, next) => {
       token,
       bio: user.bio,
       avatar: user.avatar,
+      tags: user.followedTags,
     },
   });
 };
@@ -379,7 +386,14 @@ const fbLogin = async (req, res, next) => {
 // when login is successful, retrieve user info
 const twitterLogin = (req, res) => {
   if (req.user) {
-    const { name, id: userId, email, bio, avatar } = req.user;
+    const {
+      name,
+      id: userId,
+      email,
+      bio,
+      avatar,
+      followedTags: tags,
+    } = req.user;
     const token = createJWTtoken(req.user.id, req.user.email);
     res.status(201).json({
       user: {
@@ -389,6 +403,7 @@ const twitterLogin = (req, res) => {
         bio,
         avatar,
         token,
+        tags,
       },
     });
   }

@@ -9,7 +9,7 @@ import { PostTags } from '../../PostTags/PostTags';
 import { PostImage } from '../../PostImage/PostImage';
 import { formatDate } from '../../../utils';
 import './PostContent.css';
-import SyntaxHighlight from '../../SyntaxHighlight';
+import SyntaxHighlight from '../../SyntaxHighlight/SyntaxHighlight';
 
 const PostContent = ({ post, handleDelete }) => {
   const { image, imgAlt, author, titleURL, date, title, tags, body, id } = post;

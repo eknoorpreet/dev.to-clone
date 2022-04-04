@@ -206,8 +206,8 @@ export let editProfileForm = {
     validationRules: [requiredRule('name')],
   },
   avatar: {
-    ...createFormFieldConfig('Image', 'image', 'file'),
-    validationRules: [requiredRule('image')],
+    ...createFormFieldConfig('Avatar', 'avatar', 'file'),
+    validationRules: [requiredRule('avatar')],
   },
   bio: {
     ...createFormFieldConfig('Bio', 'bio', 'text'),

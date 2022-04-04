@@ -14,7 +14,7 @@ passport.serializeUser((user, done) => {
 // deserialize the cookieUserId to user in the database
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate('followedTags');
     done(null, user);
   } catch (err) {
     done(new Error('Failed to deserialize a user'));
@@ -53,7 +53,6 @@ passport.use(
           password: hashedPassword,
           avatar: picture || DEFAULT_AVATAR,
         });
-        console.log(user);
         try {
           await user.save();
         } catch (err) {

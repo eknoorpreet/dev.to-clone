@@ -64,6 +64,11 @@
   border: 1px solid var(--color-primary);
 }
 
+.form__auth button.btn__auth,
+.form__auth a.btn__auth {
+  font-size: 1.4rem;
+}
+
 .btn__auth--mode {
   background-color: var(--color-primary);
   color: var(--color-white);
