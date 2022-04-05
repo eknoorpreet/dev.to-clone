@@ -7,11 +7,13 @@
   <br>
 </h1>
 
-An DEV.to clone created with MongoDB, Express, React, and Socket.io
-
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c804d244-6f9d-4e37-be5d-3a8f5bd4e414/deploy-status)](https://app.netlify.com/sites/devfrom/deploys)
 
 [![forthebadge](https://svgshare.com/i/fcr.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+
+> An DEV.to clone created with MongoDB, Express, React, Node, and Socket.io
+
+![](screenshots/devto-cover.png)
 
 ## [Live Site](https://devfrom.netlify.app)
 
