@@ -12,16 +12,26 @@
   max-width: 80rem;
   width: 100%;
 }
+
 .form__create h2,
 .form__edit h2 {
   text-align: center;
   margin: 1rem 0;
-  font-size: 3rem;
+  font-size: 3.3rem;
+  color: #525252;
+}
+
+@media (min-width: 1024px) {
+  .form__create h2,
+  .form__edit h2 {
+    font-size: 5rem;
+  }
 }
 
 .form__create label,
 .form__edit label {
   font-weight: 700;
+  color: #525252;
 }
 
 .form__group {

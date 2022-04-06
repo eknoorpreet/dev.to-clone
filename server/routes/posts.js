@@ -35,9 +35,7 @@ router.post(
   fileUpload.single('image'),
   [
     check('title').not().isEmpty(),
-    check('imageAlt').not().isEmpty(),
     check('body').not().isEmpty(),
-    check('topic').not().isEmpty(),
     check('tags').not().isEmpty(),
     check('titleURL').not().isEmpty(),
     check('author').not().isEmpty(),
@@ -50,9 +48,7 @@ router.patch(
   fileUpload.single('image'),
   [
     check('title').not().isEmpty(),
-    check('imageAlt').not().isEmpty(),
     check('body').not().isEmpty(),
-    check('topic').not().isEmpty(),
     check('tags').not().isEmpty(),
     check('titleURL').not().isEmpty(),
   ],

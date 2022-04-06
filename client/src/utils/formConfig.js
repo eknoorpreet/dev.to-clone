@@ -138,22 +138,9 @@ export const newPostForm = {
     ...createFormFieldConfig('Image', 'image', 'file'),
     validationRules: [requiredRule('image')],
   },
-  imageAlt: {
-    ...createFormFieldConfig('Image Alt', 'imageAlt', 'text'),
-    validationRules: [requiredRule('Image Alt')],
-  },
-  // imageCredit: {
-  //   ...createFormFieldConfig("Image Credit", "imageCredit", "text"),
-  //   validationRules: [requiredRule("Image Credit")],
-  // },
-
   body: {
     ...createFormFieldConfig('Body', 'body', 'text'),
     validationRules: [requiredRule('Body')],
-  },
-  topic: {
-    ...createFormFieldConfig('Topic', 'topic', 'text'),
-    validationRules: [requiredRule('Topic')],
   },
   tags: {
     ...createFormFieldConfig('Tags', 'tags', 'text'),
@@ -174,21 +161,9 @@ export let editPostForm = {
     ...createFormFieldConfig('Image', 'image', 'file'),
     validationRules: [requiredRule('image')],
   },
-  imageAlt: {
-    ...createFormFieldConfig('Image Alt', 'imageAlt', 'text'),
-    validationRules: [requiredRule('Image Alt')],
-  },
-  // imageCredit: {
-  //   ...createFormFieldConfig("Image Credit", "imageCredit", "text"),
-  //   validationRules: [requiredRule("Image Credit")],
-  // },
   body: {
     ...createFormFieldConfig('Body', 'body', 'text'),
     validationRules: [requiredRule('Body')],
-  },
-  topic: {
-    ...createFormFieldConfig('Topic', 'topic', 'text'),
-    validationRules: [requiredRule('Topic')],
   },
   tags: {
     ...createFormFieldConfig('Tags', 'tags', 'text'),

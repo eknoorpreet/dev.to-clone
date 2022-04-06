@@ -1,4 +1,5 @@
 client/node_modules
+client/build
 client/.env
 client/.env.production
 

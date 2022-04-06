@@ -19,7 +19,6 @@ const PostList = (props) => {
                   title={post.title}
                   body={post.body}
                   image={post.image}
-                  imgAlt={post.imgAlt}
                   date={post.date}
                   author={props.author || post.author}
                   tags={post.tags}

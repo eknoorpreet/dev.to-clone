@@ -13,8 +13,7 @@ const PostPreview = (props) => {
   const { currentUser } = useContext(AuthContext);
   const userId = currentUser && currentUser.userId;
 
-  const { title, id, image, imageAlt, author, date, titleURL, tags, cover } =
-    props;
+  const { title, id, image, author, date, titleURL, tags, cover } = props;
   const createdAt = formatDate(date);
 
   return (
@@ -23,7 +22,7 @@ const PostPreview = (props) => {
         <PostImage
           link={`/posts/${titleURL}/${id}`}
           src={image}
-          alt={imageAlt}
+          alt={`Cover image for ${title}`}
         />
       )}
       <div className='preview__author'>

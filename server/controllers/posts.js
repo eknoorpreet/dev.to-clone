@@ -67,13 +67,11 @@ const createPost = async (req, res, next) => {
     return next(new HttpError('Invalid inputs passed, please try again!', 422));
   }
   const imageUrl = await uploadToCloudinary(req.file);
-  const { title, imageAlt, body, topic, tags, titleURL, author } = req.body;
+  const { title, body, tags, titleURL, author } = req.body;
   const createdPost = await Post.create({
     title,
     image: imageUrl,
-    imageAlt,
     body,
-    topic,
     titleURL,
     author,
   });

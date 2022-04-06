@@ -43,7 +43,7 @@ const NewPost = () => {
       ) : (
         <div className='container-create-page'>
           <form className='form form__create'>
-            <h2>Add a New Post</h2>
+            <h2>Create a new post</h2>
             {formInputs}
             <button
               onClick={postSubmitHandle}

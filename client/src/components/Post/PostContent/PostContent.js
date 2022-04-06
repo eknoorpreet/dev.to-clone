@@ -12,14 +12,14 @@ import './PostContent.css';
 import SyntaxHighlight from '../../SyntaxHighlight/SyntaxHighlight';
 
 const PostContent = ({ post, handleDelete }) => {
-  const { image, imgAlt, author, titleURL, date, title, tags, body, id } = post;
+  const { image, author, titleURL, date, title, tags, body, id } = post;
   const createdAt = formatDate(date);
   const { currentUser } = useContext(AuthContext);
   const currentUserId = currentUser && currentUser.userId;
 
   return (
     <div className='post'>
-      <PostImage src={image} alt={imgAlt} />
+      <PostImage src={image} alt={`Cover image for ${title}`} />
       <div className='post__body'>
         <div className='post__author'>
           <Avatar link={`/users/${author.id}`} src={author.avatar} />
