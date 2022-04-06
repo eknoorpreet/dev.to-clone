@@ -13,7 +13,7 @@
 
 > An DEV.to clone created with MongoDB, Express, React, Node, and Socket.io
 
-![](screenshots/devto-cover.png)
+![](screenshots/cover.png)
 
 ## [Live Site](https://devfrom.netlify.app)
 
@@ -48,36 +48,6 @@
 - Search Posts
 - Real-time Notifications
 - Skeleton Loading
-
-## Screenshots
-
-### Login / Signup
-
-![](screenshots/devto-login-signup.gif)
-
-### Like / Unicorn / Bookmark
-
-![](screenshots/devto-like-unicorn-bookmark.gif)
-
-### Create Post / Comment
-
-![](screenshots/devto-create-post-comment.gif)
-
-### Real-time Notifications
-
-![](screenshots/devto-real-time.gif)
-
-### Follow Tags
-
-![](screenshots/devto-tags.gif)
-
-### Edit Profile
-
-![](screenshots/devto-edit-profile.gif)
-
-### Search
-
-![](screenshots/devto-search.gif)
 
 ## How to setup locally
 
@@ -148,3 +118,37 @@ Finally, run <code>npm start</code> in both `client` and `server` subdirectories
 $ cd server && npm start
 $ cd client && npm start
 ```
+
+## Screenshots
+
+### Login / Signup
+
+![](screenshots/login-signup.gif)
+
+### Like / Unicorn / Bookmark
+
+![](screenshots/like-unicorn-bookmark.gif)
+
+### New Post
+
+![](screenshots/new-post.gif)
+
+### Comments and Replies
+
+![](screenshots/comments-replies.gif)
+
+### Real-time Notifications
+
+![](screenshots/notif.gif)
+
+### Follow Tags
+
+![](screenshots/tags.gif)
+
+### Edit Profile
+
+![](screenshots/edit-profile.gif)
+
+### Search
+
+![](screenshots/search.gif)
