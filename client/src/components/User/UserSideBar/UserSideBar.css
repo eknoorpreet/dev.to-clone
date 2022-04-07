@@ -17,6 +17,7 @@
   border: 2px solid #efefef;
   border-radius: var(--border-radius);
   padding: 2rem;
+  overflow-wrap: break-word;
 }
 
 .user-stats ul {
