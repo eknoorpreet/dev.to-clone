@@ -49,7 +49,7 @@ require('./config/passport-twitter');
 
 const io = new Server(httpServer, {
   cors: {
-    origin: `*`,
+    origin: CLIENT_URL,
     methods: ['GET', 'POST'],
   },
 });
@@ -57,7 +57,7 @@ socketHandlers(io);
 
 app.use(
   cors({
-    origin: CLIENT_URL, // allow to server to accept request from different origin
+    origin: CLIENT_URL, // allow to server to accept request from different origin (client)
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // allow session cookie from browser to pass through
   })
