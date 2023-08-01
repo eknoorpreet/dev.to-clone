@@ -123,15 +123,15 @@ $ cd client && npm start
 
 ### Login / Signup
 
-![](screenshots/login-signup.gif)
+![]([screenshots/](https://cdn.jsdelivr.net/gh/eknoorpreet/dev.to-clone@main/screenshots/login-signup.gif)
 
 ### Like / Unicorn / Bookmark
 
-![](screenshots/like-unicorn-bookmark.gif)
+![](https://cdn.jsdelivr.net/gh/eknoorpreet/dev.to-clone@main/screenshots/like-unicorn-bookmark.gif)
 
 ### New Post
 
-![](screenshots/new-post.gif)
+![](https://cdn.jsdelivr.net/gh/eknoorpreet/dev.to-clone@main/screenshots/new-post.gif)
 
 ### Comments and Replies
 
@@ -139,11 +139,11 @@ $ cd client && npm start
 
 ### Real-time Notifications
 
-![](screenshots/notif.gif)
+![](https://cdn.jsdelivr.net/gh/eknoorpreet/dev.to-clone@main/screenshots/notif.gif)
 
 ### Follow Tags
 
-![](screenshots/tags.gif)
+![](https://cdn.jsdelivr.net/gh/eknoorpreet/dev.to-clone@main/screenshots/tags.gif)
 
 ### Edit Profile
 
