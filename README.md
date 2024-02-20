@@ -115,8 +115,8 @@ TWITTER_CONSUMER_SECRET = //Twitter's Consumer Secret
 Finally, run <code>npm start</code> in both `client` and `server` subdirectories
 
 ```shell
-$ cd server && npm start
-$ cd client && npm start
+cd server && npm start
+cd client && npm start
 ```
 
 ## Screenshots
