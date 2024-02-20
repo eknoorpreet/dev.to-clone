@@ -30,7 +30,16 @@ const {
 const httpServer = createServer(app);
 
 app.set('trust proxy', 1);
-app.use(cors());
+
+// Configure CORS
+const corsOptions = {
+  origin: '*', // Allow requests from any origin
+  methods: ['GET', 'POST'], // Specify the allowed HTTP methods
+  credentials: true, // Enable sending cookies in CORS requests
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
 
 app.use(
   cookieSession({
@@ -49,43 +58,26 @@ app.use(passport.session());
 require('./config/passport-twitter');
 
 const io = new Server(httpServer, {
-  cors: {
-    origin: CLIENT_URL,
-    methods: ['GET', 'POST'],
-  },
+  cors: {corsOptions},
 });
 socketHandlers(io);
 
-app.use(
-  cors({
-    origin: CLIENT_URL, // allow to server to accept request from different origin (client)
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // allow session cookie from browser to pass through
-  })
-);
+// Define your routes
+app.use('/api/posts',cors(), postsRoutes);
+app.use('/api/users',cors(), usersRoutes);
+app.use('/api/comments', cors(), commentsRoutes);
+app.use('/api/tags', cors(), tagsRoutes);
 
-app.use('/api/posts', postsRoutes);
-
-app.use('/api/users', usersRoutes);
-
-app.use('/api/comments', commentsRoutes);
-
-app.use('/api/tags', tagsRoutes);
-
-app.get('/', (req, res) => {
+// Define a default route
+app.get('/', cors(), (req, res) => {
   res.send('DEV.to is running');
 });
 
-// app.use((req, res, next) => {
-//   throw new HttpError('Could not find the route', 404);
-// });
-
+// Error handling middleware
 app.use((error, req, res, next) => {
   if (res.headerSent) {
-    //res already sent ? => don't send res, just forward the error
     return next(error);
   }
-  //else, send a res
   res.status(error.code || 500);
   res.json({
     message: error.message || 'An unknown error occurred',
