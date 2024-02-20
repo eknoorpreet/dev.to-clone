@@ -30,6 +30,7 @@ const {
 const httpServer = createServer(app);
 
 app.set('trust proxy', 1);
+app.use(cors());
 
 app.use(
   cookieSession({
@@ -93,7 +94,7 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.ynmnh.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
+    `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.avchopq.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
     {
       useUnifiedTopology: true,
       useNewUrlParser: true,
